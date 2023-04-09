@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>App</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <script>
+    function setAnswer(answer) {
+      fetch(`${window.location.origin}/api/answer${window.location.search}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        body: JSON.stringify({answer})
+      })
+    }
+  </script>
+  <body>
+    <main>
+      <section class="main">
+        <p class="title title-font">Ю&Е</p>
+        <p class="invitations title-font">{{ invitations }}!</p>
+        <p class="description description-font" style="text-transform: uppercase;">
+          Мы рады пргласить вас на день рождение нашей семьи
+        </p>
+        <p class="date title-font">9 июня 2023 года</p>
+        <ul class="timing">
+          <li class="time time-1">
+            <div class="time-value time-font">16.15 -</div>
+            <div class="time-description description-font">
+              <p style="text-transform: uppercase;">торжественная регистрация</p>
+              <p>Дом Дружбы Народов</p>
+              <p>ул. Орджоникидзе, 33 а</p>
+            </div>
+          </li>
+          <li class="time time-2">
+            <div class="time-value time-font">18.00 -</div>
+            <div class="time-description description-font">
+              <p style="text-transform: uppercase;">праздничный банкет</p>
+              <p>Гостевой дом  "Завьяловский"</p>
+            </div>
+          </li>
+        </ul>
+        <p class="dress-code title-font">Dress Code</p>
+        <p class="wishes description-font">Мы будем очень рады, если в своих нарядах и букетах вы поддержите нашу цветовую гамму</p>
+        <ul class="colors">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </section>
+      <div class="btns">
+        <button onclick="setAnswer(true)">Да</button>
+        <button onclick="setAnswer(false)">К сожалению нет</button>
+      </div>
+    </main>
+  </body>
+</html>
