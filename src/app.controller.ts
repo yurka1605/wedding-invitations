@@ -8,6 +8,12 @@ export class AppController {
 
   @Get()
   @Render('index')
+  default() {
+    return { invitations: 'Дорогие гости' }
+  }
+
+  @Get()
+  @Render('index')
   async root(
     @Query(
       'invited',
