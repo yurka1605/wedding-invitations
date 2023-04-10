@@ -6,26 +6,29 @@
 
 @font-face {
     font-family: "CormorantGaramond"; 
-    font-display: swap;
+    font-display: fallback;
     font-weight: 400;
     font-style: normal;
-    src: url("./fonts/CormorantGaramond-Medium.woff2") format("woff2"); 
+    src: url("./fonts/CormorantGaramond-Medium.woff2") format("woff2");
+    unicode-range: U+000-5FF;
 }
      
 @font-face{
     font-family: "Kitsch";
-    font-display: swap;
+    font-display: fallback;
     font-weight: 400;
     font-style: normal;
     src: url("./fonts/KitschText-Extralight.woff2") format("woff2");
+    unicode-range: U+000-5FF;
 }
 
 @font-face {
     font-family: "Anastasia";
-    font-display: swap;
+    font-display: fallback;
     font-weight: 400;
     font-style: normal;
     src: url('./fonts/Anastasia-Script_Regular.woff2') format("woff2");
+    unicode-range: U+000-5FF;
 }
 
 
