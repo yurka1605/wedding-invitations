@@ -50,10 +50,12 @@
           <li></li>
         </ul>
       </section>
-      <div class="btns">
-        <button onclick="setAnswer(true)">Да</button>
-        <button onclick="setAnswer(false)">К сожалению нет</button>
-      </div>
+      <% if (haveInvitations) { %>
+        <div class="btns">
+          <button onclick="setAnswer(true)">Да</button>
+          <button onclick="setAnswer(false)">К сожалению нет</button>
+        </div>
+      <% } %>
     </main>
   </body>
 </html>

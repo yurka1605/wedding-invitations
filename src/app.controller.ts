@@ -8,24 +8,18 @@ export class AppController {
 
   @Get()
   @Render('index')
-  default() {
-    return { invitations: 'Дорогие гости' }
-  }
+  async root(@Query('invitations') invitations?: string) {
+    if (!invitations) {
+      return { invitations: 'Дорогие гости', haveInvitations: false };
+    }
 
-  @Get()
-  @Render('index')
-  async root(
-    @Query(
-      'invited',
-      new ParseArrayPipe({ items: Number, separator: ',' })
-    ) ids: number[]
-  ) {
+    const ids = invitations.split(',').map(i => +i);
     try {
       const invitations: string = (await this.googleSheetsService.getUsersNamesByIds(ids)).join(' и ');
       if (process.env.NODE_ENV === 'prod') {
         await this.googleSheetsService.updateViews(ids);
       }
-      return { invitations };
+      return { invitations, haveInvitations: true };
     } catch (error) {
       return error;
     }
@@ -33,7 +27,7 @@ export class AppController {
 
   @Post('api/answer')
   async updateAnswer(
-    @Query('invited', new ParseArrayPipe({ items: Number, separator: ',' })) invited: number[],
+    @Query('invitations', new ParseArrayPipe({ items: Number, separator: ',' })) invited: number[],
     @Body() answerDto: AnswerDto
   ) {
     try {
