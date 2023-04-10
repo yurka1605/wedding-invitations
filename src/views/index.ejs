@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iurii and Ekaterina's wedding invitation</title>
-    <link rel="preload">
+    <link as="font" crossorigin="anonymous" href="/fonts/Anastasia-Script_Regular.woff2" rel="preload">
+    <link as="font" crossorigin="anonymous" href="/fonts/KitschText-Extralight.woff2" rel="preload">
+    <link as="font" crossorigin="anonymous" href="/fonts/CormorantGaramond-Medium.woff2" rel="preload">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -51,14 +53,6 @@
         </div>
       <% } %>
     </main>
-    <script>
-      function setAnswer(answer) {
-        fetch(`${window.location.origin}/api/answer${window.location.search}`, {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json;charset=utf-8'},
-          body: JSON.stringify({answer})
-        })
-      }
-    </script>
+    <script defer src="script.js"></script>
   </body>
 </html>
