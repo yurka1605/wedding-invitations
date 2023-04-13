@@ -1,9 +1,11 @@
-import { Body, Controller, Get, ParseArrayPipe, Post, Query, Render } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Logger, ParseArrayPipe, Post, Query, Render } from '@nestjs/common';
 import { AnswerDto } from './answer.dto';
 import { GoogleSheetsService } from './google-sheets.service';
 
 @Controller()
 export class AppController {
+  private readonly logger = new Logger('App');
+
   constructor(private readonly googleSheetsService: GoogleSheetsService) {}
 
   @Get()
@@ -22,7 +24,8 @@ export class AppController {
       }
       return { invitations, hasInvitations: true, answer: res.answer };
     } catch (error) {
-      return error;
+      this.logger.error(error);
+      throw new HttpException(error, HttpStatus.NOT_FOUND);
     }
   }
 
@@ -34,7 +37,8 @@ export class AppController {
     try {
       return await this.googleSheetsService.setAnswer(invited, answerDto);
     } catch (error) {
-      return error;
+      this.logger.error(error);
+      throw new HttpException(error, HttpStatus.TOO_MANY_REQUESTS);
     }
   }
 }

@@ -1,15 +1,17 @@
 async function setAnswer(answer) {
-  if (answer) {
-    loadParticles();
-  }
-
-  document.querySelector('.answers').classList.add('hide');
-  document.querySelector(answer ? '.welcome-message' : '.regret-message').classList.remove('hide');
-
   fetch(`${window.location.origin}/api/answer${window.location.search}`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json;charset=utf-8'},
     body: JSON.stringify({answer})
+  }).then(res => {
+    if (answer) {
+      loadParticles();
+    }
+
+    document.querySelector('.answers').classList.add('hide');
+    document.querySelector(answer ? '.welcome-message' : '.regret-message').classList.remove('hide');
+  }).catch(err => {
+    alert(err);
   });
 }
 
