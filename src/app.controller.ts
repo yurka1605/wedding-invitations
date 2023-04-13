@@ -10,7 +10,7 @@ export class AppController {
   @Render('index')
   async root(@Query('invitations') invitations?: string) {
     if (!invitations) {
-      return { invitations: 'Дорогие гости', haveInvitations: false };
+      return { invitations: 'Дорогие гости', hasInvitations: false };
     }
 
     const ids = invitations.split(',').map(i => +i);
