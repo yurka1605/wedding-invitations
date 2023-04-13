@@ -70,13 +70,13 @@ export class GoogleSheetsService {
     });
   }
 
-  private async updateLinksForUsers() {
-    await this.sheet.loadCells();
-    this.data.forEach(el => {
-      el.link = this.link + el.rowIndex;
-      this.sheet.getCell(el.rowIndex - 1, this.rowLinkIndex).value = el.link;
-    });
+  // private async updateLinksForUsers() {
+  //   await this.sheet.loadCells();
+  //   this.data.forEach(el => {
+  //     el.link = this.link + el.rowIndex;
+  //     this.sheet.getCell(el.rowIndex - 1, this.rowLinkIndex).value = el.link;
+  //   });
 
-    this.sheet.saveUpdatedCells();
-  }
+  //   this.sheet.saveUpdatedCells();
+  // }
 }
