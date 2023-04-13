@@ -5,38 +5,44 @@
 }
 
 @font-face {
-    font-family: "CormorantGaramond"; 
+    font-family: "CormorantSC"; 
     font-display: fallback;
-    font-weight: 400;
+    font-weight: 700;
     font-style: normal;
-    src: url("./fonts/CormorantGaramond-Medium.woff2") format("woff2");
-    unicode-range: U+000-5FF;
-}
-     
-@font-face{
-    font-family: "Kitsch";
-    font-display: fallback;
-    font-weight: 400;
-    font-style: normal;
-    src: url("./fonts/KitschText-Extralight.woff2") format("woff2");
+    src: url("./fonts/CormorantSC-Bold.woff2") format("woff2");
     unicode-range: U+000-5FF;
 }
 
 @font-face {
-    font-family: "Anastasia";
+    font-family: "CormorantSC"; 
+    font-display: fallback;
+    font-weight: 500;
+    font-style: normal;
+    src: url("./fonts/CormorantSC-Medium.woff2") format("woff2");
+    unicode-range: U+000-5FF;
+}
+     
+@font-face{
+    font-family: "SloopScriptPro";
     font-display: fallback;
     font-weight: 400;
     font-style: normal;
-    src: url('./fonts/Anastasia-Script_Regular.woff2') format("woff2");
+    src: url("./fonts/SloopScriptPro-Regular.woff2") format("woff2");
     unicode-range: U+000-5FF;
 }
-
 
 html, body {
     height: 100%;
     width: 100%;
+    font-family: "CormorantSC";
+    font-weight: 700;
+    color: rgb(118, 88, 48);
     background-color: rgb(235 236 240);
     overflow: hidden;
+}
+
+a {
+    color: rgb(118, 88, 48);
 }
 
 ul, li {
@@ -54,84 +60,91 @@ main {
 
 .main {
     position: relative;
-    width: 980px;
-    height: 980px;
+    width: 712px;
+    height: 997px;
     max-width: 100%;
     max-height: 100%;
+    padding-top: 135px;
+    background-image: url('./images/bg.webp');
     background-size: cover;
-    background-image: url(./images/bg-main.webp);
+    background-position: top left;
+    overflow: hidden;
+}
+
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .main p, .main div, .main ul {
+    position: relative;
     z-index: 1;
 }
 
-.main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 96%;
-    height: 98%;
-    background-size: cover;
-    background-image: url(./images/bg-2.webp);
-    transform: translate(11.9748px, -0.66425px) rotate(26.3852deg);
-    opacity: 0.9;
-    z-index: 0;
-}
-
 .title-font {
-    font-family: "Anastasia";
-    color: rgb(161, 177, 163);
+    font-family: "SloopScriptPro";
+    color: rgb(190, 145, 79);
     text-decoration: none;
     font-weight: normal
 }
 
-.description-font {
-    font-family: "Kitsch";
-    color: rgb(161, 177, 163);
-    font-style: normal;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-}
-
-.time-font {
-    font-family: "CormorantGaramond";
-    font-style: normal;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-}
-
-.title {
-    font-size: 115px;
-    letter-spacing: -9px;
-    margin-left: -10%;
-}
-
 .invitations {
-    font-size: 53px;
-    padding-top: 0px;
-    padding-bottom: 22px;
-    letter-spacing: 15px;
+    font-size: 66px;
+    padding-bottom: 6px;
+    letter-spacing: 2px;
+    line-height: 1;
 }
 
 .description {
-    font-size: 15px;
-    max-width: 47%;
-    letter-spacing: 4px;
+    font-size: 20px;
+    letter-spacing: 2px;
     text-align: center;
 }
 
 .date {
-    font-size: 51px;
-    padding-top: 20px;
-    padding-bottom: 14px;
-    letter-spacing: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.week-day,
+.year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid rgb(180, 139, 88);
+    border-bottom: 2px solid rgb(180, 139, 88);
+    height: 63px;
+    width: 219px;
+}
+
+.week-day {
+    font-size: 21px;
+    letter-spacing: 6px;
+}
+
+.year {
+    font-size: 29px;
+    letter-spacing: 4px;
+}
+
+.day {
+    height: 63px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    font-size: 73px;
+    line-height: 1;
+    margin-top: -21px;
+}
+
+.mounth {
+    padding-top: 34px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    letter-spacing: 8px;
 }
 
 .time {
@@ -155,11 +168,11 @@ main {
 }
 
 .timing {
-    padding-bottom: 25px;
+    padding-bottom: 18px;
+    padding-top: 31px;
 }
 
 .time-value {
-    padding-right: 20px;
     font-size: 28px;
     line-height: 1.5;
     width: 90px;
@@ -171,40 +184,36 @@ main {
 }
 
 .time-description {
-    font-size: 19px;
+    position: absolute;
+    font-size: 21px;
     letter-spacing: 1px;
     opacity: 0;
+    padding-left: 32px;
 }
 
 .time:last-child {
-    padding-top: 18px;
-}
-
-.time:last-child .time-description {
-    font-size: 16px;
+    padding-top: 32px;
 }
 
 .dress-code {
-    font-size: 58px;
-    letter-spacing: 5px;
+    font-size: 42px;
+    letter-spacing: 2px;
 }
 
 .wishes {
-    max-width: 48%;
     text-align: center;
-    font-size: 17px;
-    letter-spacing: 0.2px;
-    padding-bottom: 24px;
-    padding-top: 16px;
+    font-size: 20px;
+    padding-bottom: 27px;
+    padding-top: 13px;
 }
 
 .colors {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 63px;
+    padding-bottom: 43px;
     opacity: 0;
-    animation: show 1s linear .8s  forwards;
+    animation: show 1s linear .8s forwards;
 }
 
 @keyframes show {
@@ -213,30 +222,65 @@ main {
 }
 
 .colors li {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: block;
-    margin: 0 8px;
-    background-color: yellow;
+    margin: 0 12px;
     border-radius: 50%;
 }
 
 .colors li:first-child {
-    background-color: rgb(194 205 202);
+    background-color: rgb(200, 195, 195);
 }
 
 .colors li:nth-child(2) {
-    background-color: rgb(214 166 170);
+    background-color: rgb(174, 198, 184);
 }
 
 .colors li:nth-child(3) {
-    background-color: rgb(238 212 209);
+    background-color: rgb(169, 197, 214);
 }
 
 .colors li:nth-child(4) {
-    background-color: rgb(206 218 220);
+    background-color: rgb(223, 184, 206);
 }
 
 .colors li:last-child {
-    background-color: rgb(207 197 185);
+    background-color: rgb(212, 179, 187);
+}
+
+.answer-title {
+    font-size: 27px;
+    letter-spacing: 1px;
+}
+
+.btns {
+    font-size: 47px;
+    letter-spacing: 1px;
+    padding-top: 10px;
+    user-select: none;
+}
+
+.btns span {
+    cursor: pointer;
+}
+
+.btns span:first-child {
+    padding-right: 36px;
+}
+
+.hide {
+    display: none;
+}
+
+.welcome-message {
+    text-align: center;
+    font-size: 66px;
+}
+
+.regret-message {
+    text-align: center;
+    font-size: 27px;
+    letter-spacing: 1px;
+    width: 64%;
 }

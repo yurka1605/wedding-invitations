@@ -15,11 +15,12 @@ export class AppController {
 
     const ids = invitations.split(',').map(i => +i);
     try {
-      const invitations: string = (await this.googleSheetsService.getUsersNamesByIds(ids)).join(' и ');
+      const res = await this.googleSheetsService.getUsersByIds(ids);
+      const invitations: string = res.invitations.join(' и ');
       if (process.env.NODE_ENV === 'prod') {
         await this.googleSheetsService.updateViews(ids);
       }
-      return { invitations, haveInvitations: true };
+      return { invitations, hasInvitations: true, answer: res.answer };
     } catch (error) {
       return error;
     }

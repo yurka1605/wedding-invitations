@@ -5,56 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iurii and Ekaterina's wedding invitation</title>
-    <link as="font" crossorigin="anonymous" href="/fonts/Anastasia-Script_Regular.woff2" rel="preload">
-    <link as="font" crossorigin="anonymous" href="/fonts/KitschText-Extralight.woff2" rel="preload">
-    <link as="font" crossorigin="anonymous" href="/fonts/CormorantGaramond-Medium.woff2" rel="preload">
-    <link rel="preload" as="image" href="images/bg-main.webp">
-    <link rel="preload" as="image" href="images/bg-2.webp">
+    <link as="font" crossorigin="anonymous" href="/fonts/CormorantSC-Bold.woff2" rel="preload">
+    <link as="font" crossorigin="anonymous" href="/fonts/CormorantSC-Medium.woff2" rel="preload">
+    <link as="font" crossorigin="anonymous" href="/fonts/SloopScriptPro-Regular.woff2" rel="preload">
+    <link rel="preload" as="image" href="images/bg.webp">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main>
       <section class="main">
-        <p class="title title-font">Ю&Е</p>
-        <p class="invitations title-font"><%= invitations %>!</p>
-        <p class="description description-font" style="text-transform: uppercase;">
-          Мы рады пргласить вас на день рождение нашей семьи
-        </p>
-        <p class="date title-font">9 июня 2023 года</p>
-        <ul class="timing">
-          <li class="time time-1">
-            <div class="time-value time-font">16.15 -</div>
-            <div class="time-description description-font">
-              <p style="text-transform: uppercase;">торжественная регистрация</p>
-              <p>Дом Дружбы Народов</p>
-              <p>ул. Орджоникидзе, 33 а</p>
-            </div>
-          </li>
-          <li class="time time-2">
-            <div class="time-value time-font">18.00 -</div>
-            <div class="time-description description-font">
-              <p style="text-transform: uppercase;">праздничный банкет</p>
-              <p>Гостевой дом  "Завьяловский"</p>
-            </div>
-          </li>
-        </ul>
-        <p class="dress-code title-font">Dress Code</p>
-        <p class="wishes description-font">Мы будем очень рады, если в своих нарядах и букетах вы поддержите нашу цветовую гамму</p>
-        <ul class="colors">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </section>
-      <% if (haveInvitations) { %>
-        <div class="btns">
-          <button onclick="setAnswer(true)">Да</button>
-          <button onclick="setAnswer(false)">К сожалению нет</button>
+        <div class="content">
+          <p class="invitations title-font"><%= invitations %>!</p>
+          <p class="description" style="text-transform: uppercase;">
+            Мы рады пригласить вас на день<br> рождение нашей семьи
+          </p>
+          <p class="mounth">ИЮНЬ</p>
+          <div class="date">
+            <div class="week-day">ПЯТНИЦА</div>
+            <div class="day">9</div>
+            <div class="year">2023</div>
+          </div>
+          <ul class="timing">
+            <li class="time time-1">
+              <div class="time-value">16.15 -</div>
+              <div class="time-description">
+                <p style="text-transform: uppercase;">торжественная регистрация</p>
+                <p>Дом Дружбы Народов</p>
+                <p><a title="Посмотреть на карте" href="https://go.2gis.com/uqle2p" target="_blank">ул. Орджоникидзе, 33 а </a></p>
+              </div>
+            </li>
+            <li class="time time-2">
+              <div class="time-value">18.00 -</div>
+              <div class="time-description">
+                <p style="text-transform: uppercase;">праздничный банкет</p>
+                <p>Гостевой дом "Завьяловский"</p>
+                <p><a title="Посмотреть на карте" href="https://go.2gis.com/x09hkz" target="_blank">Гольянский тракт, 2</a></p>
+              </div>
+            </li>
+          </ul>
+          <p class="dress-code title-font">Dress Code</p>
+          <p class="wishes">Мы будем очень рады, если в своих нарядах и<br> букетах вы поддержите нашу цветовую гамму</p>
+          <ul class="colors">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+          <% if (hasInvitations) { %>
+            <% if (answer == 'Not answered') { %>
+              <div class="answers">
+                <div class="answer-title">Нам важен Ваш ответ</div>
+                <div class="btns">
+                  <span class="title-font" onclick="setAnswer(true)">Приду</span>
+                  <span class="title-font" onclick="setAnswer(false)">Не приду</span>
+                </div>
+              </div>
+            <% } %>
+            <% if (answer == 'Yes' || answer == 'Not answered') { %>
+              <div class="welcome-message title-font <%= answer == 'Not answered' ? ' hide' : '' %>">До встречи!</div>
+            <% } %>
+            <% if (answer == 'No' || answer == 'Not answered') { %>
+              <div class="regret-message<%= answer == 'Not answered' ? ' hide' : '' %>">Свяжитесь с нами, если измените свое решение</div>
+            <% } %>
+          <% } %>
         </div>
-      <% } %>
+        <div id="tsparticles"></div>
+      </section>
     </main>
+    <script defer src="tsparticles.preset.confetti.bundle.js"></script>
     <script defer src="script.js"></script>
   </body>
 </html>

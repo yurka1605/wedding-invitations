@@ -34,12 +34,21 @@ export class GoogleSheetsService {
     // this.updateLinksForUsers();
   }
 
-  async getUsersNamesByIds(ids: number[]) {
+  async getUsersByIds(ids: number[]) {
     await this.refreshRowData();
-    return ids.map(id => {
+    let answer: string;
+    const invitations = ids.map(id => {
       const invited = this.data[id - 2];
+      if (!answer) {
+        answer = invited.status;
+      }
       return invited.alias;
     });
+
+    return {
+      answer,
+      invitations,
+    }
   }
 
   
