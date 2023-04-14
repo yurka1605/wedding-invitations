@@ -19,13 +19,13 @@ export class AppController {
     try {
       const res = await this.googleSheetsService.getUsersByIds(ids);
       const invitations: string = res.invitations.join(' и ');
-      if (process.env.NODE_ENV === 'prod') {
-        this.googleSheetsService.updateViews(ids);
-      }
+      // if (process.env.NODE_ENV === 'prod') {
+      //   this.googleSheetsService.updateViews(ids);
+      // }
       return { invitations, hasInvitations: true, answer: res.answer };
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException(error, HttpStatus.NOT_FOUND);
+      throw new HttpException('Что-то пошло не так...', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -38,7 +38,7 @@ export class AppController {
       return await this.googleSheetsService.setAnswer(invited, answerDto);
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException(error.message, error.code);
+      throw new HttpException('Что-то пошло не так...', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }
