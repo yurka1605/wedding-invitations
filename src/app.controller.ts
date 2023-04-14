@@ -20,7 +20,7 @@ export class AppController {
       const res = await this.googleSheetsService.getUsersByIds(ids);
       const invitations: string = res.invitations.join(' и ');
       if (process.env.NODE_ENV === 'prod') {
-        await this.googleSheetsService.updateViews(ids);
+        this.googleSheetsService.updateViews(ids);
       }
       return { invitations, hasInvitations: true, answer: res.answer };
     } catch (error) {
@@ -38,7 +38,7 @@ export class AppController {
       return await this.googleSheetsService.setAnswer(invited, answerDto);
     } catch (error) {
       this.logger.error(error);
-      throw new HttpException(error, HttpStatus.TOO_MANY_REQUESTS);
+      throw new HttpException(error.message, error.code);
     }
   }
 }
