@@ -10,23 +10,18 @@ export class AppController {
 
   @Get()
   @Render('index')
-  async root(@Query('invitations') invitations?: string) {
+  root(@Query('invitations') invitations?: string) {
     if (!invitations) {
       return { invitations: 'Дорогие гости', hasInvitations: false };
     }
 
     const ids = invitations.split(',').map(i => +i);
-    try {
-      const res = await this.googleSheetsService.getUsersByIds(ids);
-      const invitations: string = res.invitations.join(' и ');
-      // if (process.env.NODE_ENV === 'prod') {
-      //   this.googleSheetsService.updateViews(ids);
-      // }
-      return { invitations, hasInvitations: true, answer: res.answer };
-    } catch (error) {
-      this.logger.error(error);
-      throw new HttpException('Что-то пошло не так...', HttpStatus.INTERNAL_SERVER_ERROR);
+    const res = this.googleSheetsService.getUsersByIds(ids);
+    invitations = res.invitations.join(' и ');
+    if (process.env.NODE_ENV === 'prod') {
+      this.googleSheetsService.updateViews(ids);
     }
+    return { invitations, hasInvitations: true, answer: res.answer };
   }
 
   @Post('api/answer')

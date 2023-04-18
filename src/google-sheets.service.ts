@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { GoogleSpreadsheet, GoogleSpreadsheetRow, GoogleSpreadsheetWorksheet } from 'google-spreadsheet';
 import * as creds from '../client_secret.json';
 import { AnswerDto } from './answer.dto';
@@ -11,6 +11,7 @@ export class GoogleSheetsService {
   private data: GoogleSpreadsheetRow[];
   private link = 'http://wedding-invitations-2023.ru/?invitations=';
   private rowLinkIndex = 4;
+  private readonly logger = new Logger('Google');
 
   get sheet(): GoogleSpreadsheetWorksheet {
     return this.doc.sheetsByIndex[this.sheetIndex];
@@ -29,12 +30,9 @@ export class GoogleSheetsService {
     this.doc = new GoogleSpreadsheet(this.sheetId);
     await this.doc.useServiceAccountAuth(creds);
     await this.refreshRowData();
-    
-    // uncommented if need update links
-    this.updateLinksForUsers();
   }
 
-  async getUsersByIds(ids: number[]) {
+  getUsersByIds(ids: number[]) {
     let answer: string;
     const invitations = ids.map(id => {
       const invited = this.data[id - 2];
@@ -51,7 +49,6 @@ export class GoogleSheetsService {
   }
 
   async setAnswer(ids: number[], answerDto: AnswerDto) {
-    await this.refreshRowData();
     ids.forEach(id => {
       const invited = this.data[id - 2];
       invited.status  = answerDto.answer ? 'Yes' : 'No';
@@ -60,12 +57,16 @@ export class GoogleSheetsService {
   }
 
   async updateViews(ids: number[]) {
-    await this.refreshRowData();
-    ids.forEach(id => {
-      const invited = this.data[id - 2];
-      invited.viewCount++;
-      invited.save();
-    });
+    try {
+      await this.refreshRowData();
+      ids.forEach(id => {
+        const invited = this.data[id - 2];
+        invited.viewCount++;
+        invited.save();
+      });
+    } catch (error) {
+      this.logger.error(error);
+    }
   }
 
   private async updateLinksForUsers() {
