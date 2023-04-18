@@ -9,7 +9,7 @@ export class GoogleSheetsService {
   private sheetId = '1mVLNduuKlWfjtvVY_EHJrYQ-T8ETpS4NdQMDdburuso';
   private sheetIndex = 0;
   private data: GoogleSpreadsheetRow[];
-  private link = 'https://wedding-invitation-phi-blush.vercel.app/?invitations=';
+  private link = 'http://wedding-invitations-2023.ru/?invitations=';
   private rowLinkIndex = 4;
 
   get sheet(): GoogleSpreadsheetWorksheet {
@@ -31,11 +31,10 @@ export class GoogleSheetsService {
     await this.refreshRowData();
     
     // uncommented if need update links
-    // this.updateLinksForUsers();
+    this.updateLinksForUsers();
   }
 
   async getUsersByIds(ids: number[]) {
-    await this.refreshRowData();
     let answer: string;
     const invitations = ids.map(id => {
       const invited = this.data[id - 2];
@@ -51,21 +50,20 @@ export class GoogleSheetsService {
     }
   }
 
-  
-  async updateViews(ids: number[]) {
-    await this.refreshRowData();
-    ids.forEach(id => {
-      const invited = this.data[id - 2];
-      invited.viewCount++;
-      invited.save();
-    });
-  }
-
   async setAnswer(ids: number[], answerDto: AnswerDto) {
     await this.refreshRowData();
     ids.forEach(id => {
       const invited = this.data[id - 2];
       invited.status  = answerDto.answer ? 'Yes' : 'No';
+      invited.save();
+    });
+  }
+
+  async updateViews(ids: number[]) {
+    await this.refreshRowData();
+    ids.forEach(id => {
+      const invited = this.data[id - 2];
+      invited.viewCount++;
       invited.save();
     });
   }
