@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { GoogleSpreadsheet, GoogleSpreadsheetRow, GoogleSpreadsheetWorksheet } from 'google-spreadsheet';
-import * as creds from '../client_secret.json';
+import * as creds from '../secret.json';
 import { AnswerDto } from './answer.dto';
 
 @Injectable()
